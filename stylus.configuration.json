@@ -21,5 +21,24 @@
     ["(", ")"],
     ["\"", "\""],
     ["'", "'"]
+  ],
+  "wordPattern": "(#?-?\\d*\\.\\d\\w*%?)|([$@#!.:]?[\\w-?]+%?)|[$@#!.]",
+  "onEnterRules": [
+    {
+      "beforeText": "^([\\s\/]?)+[\\.#&@\\[:].+[^,]$",
+      "action": { "indent": "indent" }
+    },
+    {
+      "beforeText": "\\s&(.*)[^,]$|&$",
+      "action": { "indent": "indent" }
+    },
+    {
+      "beforeText": "^(\\s?)+\\d{1,3}%",
+      "action": { "indent": "indent" }
+    },
+    {
+      "beforeText": "^(\\s?)+for.+in.+$",
+      "action": { "indent": "indent" }
+    }
   ]
 }

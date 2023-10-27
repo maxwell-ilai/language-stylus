@@ -23,32 +23,6 @@ export function activate(context: vscode.ExtensionContext) {
     .registerCompletionItemProvider(DOCUMENT_SELECTOR, completionItemProvider, '\\.', '$', '-', '&', '@');
   context.subscriptions.push(completionProviderDisposable);
 
-  vscode.languages.setLanguageConfiguration('stylus', {
-    wordPattern: /(#?-?\d*\.\d\w*%?)|([$@#!.:]?[\w-?]+%?)|[$@#!.]/g,
-    onEnterRules: [
-      // Indent after .class_name, #id, @media, [attr=sddsf]
-      {
-        beforeText: /^([\s\/]?)+[\.#&@\[:].+[^,]$/gi,
-        action: { indentAction: vscode.IndentAction.Indent },
-      },
-      // Indent after &
-      {
-        beforeText: /\s&(.*)[^,]$|&$/gi,
-        action: { indentAction: vscode.IndentAction.Indent },
-      },
-      // Indent after keyfames e.g. 10%
-      {
-        beforeText: /^(\s?)+\d{1,3}%/gi,
-        action: { indentAction: vscode.IndentAction.Indent },
-      },
-      // Indent after keyfames e.g. 10%
-      {
-        beforeText: /^(\s?)+for.+in.+$/gi,
-        action: { indentAction: vscode.IndentAction.Indent },
-      }
-    ]
-  });
-
   // symbol
   const symbolsProvider = new StylusDocumentSimbolsProvider();
   const symbolsProviderDisposable = vscode.languages.registerDocumentSymbolProvider(DOCUMENT_SELECTOR, symbolsProvider);
